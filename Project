@@ -1,0 +1,38 @@
+from flask import Flask, request, jsonify
+import datetime 
+import pytz
+import os 
+
+app = Flask (__name__)
+
+
+@app.route ('/info', methods=['GET'])
+def get_info ():
+
+    slack_name = request.args.get('slack_name', 'Philip Isaac Atabo')
+    track = request.args.get('track', 'Backend')
+
+    
+    current_day_of_week = datetime.datetime.now(pytz.utc).strftime ('%A')
+    
+    utc_time = datetime.datetime.utcnow()
+    Current_utc_time = utc_time.strftime('%Y-%m-%dT%H:%M:%SZ')
+
+    github_url_file =  'https://github.com/K12philip'
+    github_repo_file = 'https://github.com/K12philip/Endhost.git'
+
+    response = {
+        'Slack_name': slack_name,
+        'Current_day_of_week': current_day_of_week,
+        'Current_UTC_time': Current_utc_time,
+        'Track': track,
+        'Github_URL_file': github_url_file,
+        'Github_REPO_file': github_repo_file,
+        'Status_code': 200, 
+    }
+
+    
+    return jsonify(response)
+
+if __name__ == '__main__':
+    app.run(debug=True)
