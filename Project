@@ -31,8 +31,8 @@ def get_info ():
         'Status_code': 200, 
     }
 
-    
     return jsonify(response)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='localhost', port=5000, )  
+# "http://localhost:5000/info" (you can GET request on please use this to check on broweser)
